@@ -1,0 +1,47 @@
+
+* {
+  font-family: Consolas, monospace;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.todowrap {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.todowrap > div {
+  display: flex; 
+  flex-basis: calc(50% - 40px);  
+  justify-content: center;
+  flex-direction: column;
+}
+.todowrap > div > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.box { margin: 20px; }
+.box1 { background-color: red; }
+.box2 { background-color: orange; }
+.box3 { background-color: purple; }
+.box4 { background-color: grey; }
+
+.jb-division-line {
+  border-top: 1px solid #444444;
+  margin: 30px auto;
+  width: 300px;
+  height: 0px;
+}
+.jb-division-line:after {
+  content: "◆";
+  position: relative;
+  top: -9px;
+  left: calc( 50% - 8px );
+}
+
+
+
