@@ -26,26 +26,29 @@ function ClearTodo(event) {
   $span.innerHTML = intext
 
   clearlist.appendChild($span)
-
   li.remove()
+  console.log(typeof(li.id))
+  toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id))
+  saveToDos()
 
 }
 
 
-function paintTodos(newTodo, newNum) {
+function paintTodos(newTodo) {
   const li = document.createElement("li");
+  li.id = newTodo.id
 
   li.innerHTML = `
-    <span>${newTodo}</span> <button class="clear">✔</button>
+    <span>${newTodo.text}</span> <button class="clear">✔</button>
     `;
 
-  if (newNum == "1") {
+  if (newTodo.num == "1") {
     todo1.appendChild(li);
-  } else if (newNum == "2") {
+  } else if (newTodo.num == "2") {
     todo2.appendChild(li);
-  } else if (newNum == "3") {
+  } else if (newTodo.num == "3") {
     todo3.appendChild(li);
-  } else if (newNum == "4") {
+  } else if (newTodo.num == "4") {
     todo4.appendChild(li);
   } else {
     alert("1번부터4번까지만 지정가능")
@@ -68,11 +71,15 @@ function handleSubmit(event) {
       todo_input.value="";
       todo_num.value=""; // 추가: 우선순위 입력 필드 초기화
 
- 
+      const newTodoObj = {
+        text : newTodo,
+        num : newNum,
+        id : Date.now()
+      }
 
      // toDos.push(`{text : ${newTodo}, key : ${newNum}}`)
-     toDos.push([newTodo, newNum]);     
-      paintTodos(newTodo, newNum);
+     toDos.push(newTodoObj);     
+      paintTodos(newTodoObj);
       saveToDos();
   }
  }
@@ -85,5 +92,5 @@ const savedToDos = localStorage.getItem(ToDos_Key)
 if (savedToDos) {
   const parseToDos = JSON.parse(savedToDos);
   toDos = parseToDos
-  parseToDos.forEach(item => paintTodos(item[0],item[1]))
+  parseToDos.forEach(paintTodos)
 }
