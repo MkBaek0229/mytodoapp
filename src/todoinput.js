@@ -8,7 +8,7 @@ const todo4 = document.querySelector(".box4 > ul");
 
 const clearlist = document.getElementById("clearlist");
 
-const toDos = []
+let toDos = []
 
 const ToDos_Key = "todos"
 
@@ -84,6 +84,6 @@ const savedToDos = localStorage.getItem(ToDos_Key)
 
 if (savedToDos) {
   const parseToDos = JSON.parse(savedToDos);
-  
+  toDos = parseToDos
   parseToDos.forEach(item => paintTodos(item[0],item[1]))
 }
